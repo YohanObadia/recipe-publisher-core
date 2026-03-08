@@ -28,7 +28,8 @@ After a minute, your site will be available at:
 `https://<your-username>.github.io/<your-repo>/`
 
 ### 3) (Optional) Custom domain
-If you want a custom domain, create a `CNAME` file at the repository root containing your domain, e.g.: my-recipes.example.com
+If you want a custom domain, create a `CNAME` file at the repository root containing your domain, e.g.: 
+`my-recipes.example.com`
 
 Then configure your DNS according to GitHub Pages instructions.
 
