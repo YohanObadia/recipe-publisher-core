@@ -62,5 +62,17 @@ If you want to pull upstream changes later, use standard git merges.
 
 ---
 
+## AI publishing workflow
+
+This template is designed to support an optional AI-based publishing workflow:
+- provide a recipe by voice, text, URL, or image
+- generate a recipe draft in the correct format
+- open a Pull Request on GitHub
+- review and merge manually
+
+Detailed setup instructions for the AI publisher are available in the `docs/` folder.
+
+---
+
 ## License
 MIT (see LICENSE).
