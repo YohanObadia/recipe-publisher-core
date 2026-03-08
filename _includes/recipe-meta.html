@@ -1,0 +1,64 @@
+{% comment %}
+Affiche les métadonnées d'une recette :
+- Chef (personne + note)
+- Temps de préparation / cuisson
+- Portions
+
+Utilise les champs définis dans le front matter :
+- page.Chef.person
+- page.Chef.note
+- page.prep_time_minutes
+- page.cook_time_minutes
+- page.portions
+{% endcomment %}
+
+{% capture prep_time %}
+  {% if page.prep_time_minutes %}
+    {{ page.prep_time_minutes }} min
+  {% endif %}
+{% endcapture %}
+
+{% capture cook_time %}
+  {% if page.cook_time_minutes %}
+    {{ page.cook_time_minutes }} min
+  {% endif %}
+{% endcapture %}
+
+<ul class="recipe-meta">
+  {% if page.Chef and page.Chef.person %}
+    <li>
+      <strong>Chef :</strong>
+      {{ page.Chef.person }}{% if page.Chef.note and page.Chef.note != "" %} — {{ page.Chef.note }}{% endif %}
+    </li>
+  {% endif %}
+
+  {% if prep_time != "" %}
+    <li><strong>Préparation :</strong> {{ prep_time | strip }}</li>
+  {% endif %}
+
+  {% if cook_time != "" %}
+    <li><strong>Cuisson :</strong> {{ cook_time | strip }}</li>
+  {% endif %}
+
+  {% if page.portions %}
+    <li><strong>Portions :</strong> {{ page.portions }}</li>
+  {% endif %}
+</ul>
+
+{% if page.video and page.video.type == "youtube" and page.video.url and page.video.url != "" %}
+  {% assign v = page.video.url | strip %}
+
+  {% if v contains "youtube.com/watch" %}
+    {% assign ytid = v | split: "v=" | last | split: "&" | first %}
+  {% elsif v contains "youtu.be/" %}
+    {% assign ytid = v | split: "youtu.be/" | last | split: "?" | first %}
+  {% elsif v contains "youtube.com/embed/" %}
+    {% assign ytid = v | split: "embed/" | last | split: "?" | first %}
+  {% else %}
+    {% assign ytid = v %}
+  {% endif %}
+
+<div class="responsive-video" markdown="0">
+<iframe src="https://www.youtube.com/embed/{{ ytid }}?rel=0&modestbranding=1" title="Vidéo recette" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
+</div>
+{% endif %}

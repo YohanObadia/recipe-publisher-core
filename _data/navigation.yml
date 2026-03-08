@@ -1,0 +1,10 @@
+
+- title: "Accueil"
+  url: /
+
+- title: "Toutes les recettes"
+  url: /recettes/
+
+# Optionnel, si tu veux plus tard :
+# - title: "Recherche"
+#   url: /search/

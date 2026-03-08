@@ -1,0 +1,34 @@
+title: "Les recettes de Mamie"
+description: "Carnet de cuisine familiale"
+url: "https://mamie-recettes.com"
+baseurl: ""
+logo: "/assets/images/mamie-recettes-logo-light.png"
+
+remote_theme: "mmistakes/so-simple-theme@3.2.0"
+
+# For local builds (not needed on GitHub Pages, but harmless):
+plugins:
+  - jekyll-remote-theme
+
+collections:
+  recipes:
+    output: true
+    permalink: /recettes/:name/
+
+defaults:
+  - scope:
+      path: ""
+      type: "recipes"
+    values:
+      layout: recipe
+
+markdown: kramdown
+
+kramdown:
+  parse_block_html: true
+  parse_span_html: true
+
+highlighter: rouge
+
+sass:
+  sass_dir: assets/css

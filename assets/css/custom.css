@@ -1,0 +1,103 @@
+/* assets/css/custom.css */
+
+/* Bloc global de l'encart recette */
+.recipe-meta {
+    list-style: none;
+    margin: 0 0 2rem;
+    padding: 0.85rem 1.1rem;
+    border-radius: 0.4rem;
+    background-color: #f7f7f7;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+  
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
+  
+    font-size: 0.9rem;
+  }
+  
+  /* Chaque ligne de l'encart */
+  .recipe-meta li {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    white-space: nowrap;
+  }
+  
+  /* On enlève le gras trop lourd dans le bloc pour harmoniser */
+  .recipe-meta li strong {
+    font-weight: 600;
+  }
+  
+  /* Icônes automatiques par ligne (ordre : Chef, prépa, cuisson, portions) */
+  .recipe-meta li:nth-child(1)::before {
+    content: "👩‍🍳";
+  }
+  
+  .recipe-meta li:nth-child(2)::before {
+    content: "⏱";
+  }
+  
+  .recipe-meta li:nth-child(3)::before {
+    content: "🔥";
+  }
+  
+  .recipe-meta li:nth-child(4)::before {
+    content: "👥";
+  }
+  
+  /* Sur mobile, on laisse les éléments passer à la ligne proprement */
+  @media (max-width: 600px) {
+    .recipe-meta {
+      gap: 0.35rem 1rem;
+    }
+
+    .recipe-meta li {
+      white-space: normal;
+    }
+  }
+
+  /* Conteneur vidéo responsive */
+  .responsive-video {
+    position: relative;
+    padding-bottom: 56.25%; /* Ratio 16:9 */
+    height: 0;
+    overflow: hidden;
+    margin: 2rem 0;
+  }
+
+  .responsive-video iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  /* --- Landing page: uniformiser les images des cartes (sans déformer) --- */
+/* La home utilise layout: collection + entries_layout: grid */
+.entries-grid .entry .entry-image,
+.entries-grid .entry .entry__thumbnail,
+.entries-grid .entry .entry-thumbnail {
+  aspect-ratio: 4 / 3;   /* ajuster si tu préfères 1/1 ou 3/2 */
+  overflow: hidden;
+}
+
+.entries-grid .entry .entry-image img,
+.entries-grid .entry .entry__thumbnail img,
+.entries-grid .entry .entry-thumbnail img,
+.entries-grid .entry img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;     /* crop propre */
+  display: block;
+}
+
+/* Optionnel : évite les sauts de layout pendant le chargement */
+.entries-grid .entry .entry-image img,
+.entries-grid .entry .entry__thumbnail img,
+.entries-grid .entry .entry-thumbnail img {
+  background: #f2f2f2;
+}

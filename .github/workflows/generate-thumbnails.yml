@@ -1,0 +1,43 @@
+name: Generate landing-page thumbnails
+
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+      - "assets/images/**/main.*"
+
+permissions:
+  contents: write
+
+jobs:
+  thumbs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pillow pyyaml
+
+      - name: Generate thumbnails + update front matter
+        run: |
+          python scripts/generate_thumbnails.py --size 900x675 --quality 75 --update-front-matter
+
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add assets/images/**/thumb.jpg _recipes/*.md || true
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+            exit 0
+          fi
+          git commit -m "chore: generate recipe thumbnails"
+          git push
